@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
+use Doctrine\DBAL\Platforms\SQLitePlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -19,9 +21,9 @@ final class Version20260413091810 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $platform = $this->connection->getDatabasePlatform()->getName();
+        $platform = $this->connection->getDatabasePlatform();
 
-        if ($platform === 'sqlite') {
+        if ($platform instanceof SQLitePlatform) {
             $this->addSql('CREATE TABLE category (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(80) NOT NULL, slug VARCHAR(120) NOT NULL)');
             $this->addSql('CREATE UNIQUE INDEX uniq_category_slug ON category (slug)');
 
@@ -42,7 +44,7 @@ final class Version20260413091810 extends AbstractMigration
             return;
         }
 
-        if ($platform === 'mysql' || $platform === 'mariadb') {
+        if ($platform instanceof AbstractMySQLPlatform) {
             $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(80) NOT NULL, slug VARCHAR(120) NOT NULL, UNIQUE INDEX uniq_category_slug (slug), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
             $this->addSql('CREATE TABLE product_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(80) NOT NULL, UNIQUE INDEX UNIQ_13675885E237E06 (name), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
             $this->addSql('CREATE TABLE user_account (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, first_name VARCHAR(60) NOT NULL, last_name VARCHAR(60) NOT NULL, dob DATE NOT NULL, address_line1 VARCHAR(120) NOT NULL, postal_code VARCHAR(20) NOT NULL, city VARCHAR(80) NOT NULL, country VARCHAR(80) NOT NULL, UNIQUE INDEX uniq_user_email (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -57,14 +59,14 @@ final class Version20260413091810 extends AbstractMigration
             return;
         }
 
-        $this->abortIf(true, 'Unsupported database platform: '.$platform);
+        $this->abortIf(true, 'Unsupported database platform: '.$platform::class);
     }
 
     public function down(Schema $schema): void
     {
-        $platform = $this->connection->getDatabasePlatform()->getName();
+        $platform = $this->connection->getDatabasePlatform();
 
-        if ($platform === 'sqlite') {
+        if ($platform instanceof SQLitePlatform) {
             $this->addSql('DROP TABLE category');
             $this->addSql('DROP TABLE product');
             $this->addSql('DROP TABLE product_type');
@@ -73,7 +75,7 @@ final class Version20260413091810 extends AbstractMigration
             return;
         }
 
-        if ($platform === 'mysql' || $platform === 'mariadb') {
+        if ($platform instanceof AbstractMySQLPlatform) {
             $this->addSql('DROP TABLE shop_order');
             $this->addSql('DROP TABLE product');
             $this->addSql('DROP TABLE user_account');
@@ -82,6 +84,6 @@ final class Version20260413091810 extends AbstractMigration
             return;
         }
 
-        $this->abortIf(true, 'Unsupported database platform: '.$platform);
+        $this->abortIf(true, 'Unsupported database platform: '.$platform::class);
     }
 }
