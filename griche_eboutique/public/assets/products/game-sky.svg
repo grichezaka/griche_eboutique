@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
-  <rect width="900" height="600" fill="#0b1020"/>
-  <rect x="210" y="150" width="480" height="360" fill="rgba(15,23,42,.65)" stroke="rgba(231,238,252,.18)" stroke-width="6"/>
-  <path d="M260 420c70-90 120-160 190-210 80 40 140 110 200 210" fill="none" stroke="#7c5cff" stroke-width="18" stroke-linecap="round"/>
-  <circle cx="530" cy="260" r="18" fill="#00d4ff"/>
-  <text x="450" y="120" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="28" font-weight="900" letter-spacing="6" fill="#e7eefc">SKYFORGE</text>
-</svg>
-

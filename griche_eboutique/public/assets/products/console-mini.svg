@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
-  <rect width="900" height="600" fill="#0b1020"/>
-  <rect x="250" y="240" width="400" height="180" rx="18" fill="#0f172a" stroke="#00d4ff" stroke-width="6"/>
-  <rect x="290" y="270" width="320" height="50" rx="10" fill="rgba(255,255,255,.06)" stroke="rgba(231,238,252,.25)" stroke-width="4"/>
-  <circle cx="330" cy="350" r="12" fill="#7c5cff"/>
-  <circle cx="570" cy="350" r="12" fill="#7c5cff"/>
-  <text x="450" y="140" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="34" font-weight="900" letter-spacing="6" fill="#e7eefc">MINI RETRO</text>
-</svg>
-

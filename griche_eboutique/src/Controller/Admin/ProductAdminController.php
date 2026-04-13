@@ -9,6 +9,7 @@ use App\Service\CartService;
 use App\Service\Slug;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -35,6 +36,7 @@ class ProductAdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $product->setSlug($slugger->slugify($product->getName()));
+            $this->handleProductImageUpload($form->get('imageFile')->getData(), $product, $slugger);
             $em->persist($product);
             $em->flush();
             $this->addFlash('success', 'Produit créé.');
@@ -53,11 +55,13 @@ class ProductAdminController extends AbstractController
     #[Route('/{id}/edit', name: 'admin_products_edit', methods: ['GET', 'POST'])]
     public function edit(Product $product, Request $request, EntityManagerInterface $em, Slug $slugger, CartService $cart): Response
     {
+        $oldImagePath = $product->getImagePath();
         $form = $this->createForm(ProductFormType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $product->setSlug($slugger->slugify($product->getName()));
+            $this->handleProductImageUpload($form->get('imageFile')->getData(), $product, $slugger, $oldImagePath);
             $em->flush();
             $this->addFlash('success', 'Produit mis à jour.');
             return $this->redirectToRoute('admin_products');
@@ -76,11 +80,67 @@ class ProductAdminController extends AbstractController
     public function delete(Product $product, Request $request, EntityManagerInterface $em): Response
     {
         if ($this->isCsrfTokenValid('delete_product_'.$product->getId(), (string) $request->request->get('_token'))) {
+            $this->deleteLocalProductImage($product->getImagePath());
             $em->remove($product);
             $em->flush();
             $this->addFlash('success', 'Produit supprimé.');
         }
         return $this->redirectToRoute('admin_products');
     }
-}
 
+    private function handleProductImageUpload(
+        mixed $maybeFile,
+        Product $product,
+        Slug $slugger,
+        ?string $oldImagePath = null
+    ): void {
+        if (!$maybeFile instanceof UploadedFile) {
+            return;
+        }
+
+        $projectDir = (string) $this->getParameter('kernel.project_dir');
+        $uploadDir = $projectDir.'/public/uploads/products';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0775, true);
+        }
+
+        $ext = $maybeFile->guessExtension();
+        if (!$ext) {
+            $ext = pathinfo((string) $maybeFile->getClientOriginalName(), PATHINFO_EXTENSION) ?: 'bin';
+        }
+
+        $base = $slugger->slugify($product->getName());
+        $name = $base.'-'.bin2hex(random_bytes(6)).'.'.$ext;
+
+        $maybeFile->move($uploadDir, $name);
+
+        if ($oldImagePath) {
+            $this->deleteLocalProductImage($oldImagePath);
+        }
+
+        $product->setImagePath('/uploads/products/'.$name);
+    }
+
+    private function deleteLocalProductImage(?string $imagePath): void
+    {
+        if (!$imagePath || !str_starts_with($imagePath, '/uploads/products/')) {
+            return;
+        }
+
+        $projectDir = (string) $this->getParameter('kernel.project_dir');
+        $uploadsDir = $projectDir.'/public/uploads/products';
+        $uploadsReal = realpath($uploadsDir);
+        $targetReal = realpath($projectDir.'/public'.$imagePath);
+
+        if (!$uploadsReal || !$targetReal) {
+            return;
+        }
+
+        $uploadsReal = rtrim($uploadsReal, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+        if (!str_starts_with($targetReal, $uploadsReal)) {
+            return;
+        }
+
+        @unlink($targetReal);
+    }
+}

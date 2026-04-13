@@ -2,6 +2,11 @@
 
 E-boutique Symfony (thème : **jeux vidéo / consoles**).
 
+## URLs
+
+- **Site (production)** : http://griche.alwaysdata.net
+- **Code (GitHub)** : (à compléter) https://github.com/<user>/<repo>
+
 ## Fonctionnalités (cotation)
 
 - **OK** : fonctionnalité opérationnelle
@@ -21,7 +26,7 @@ E-boutique Symfony (thème : **jeux vidéo / consoles**).
 | Ajout d'un nouveau type d'article proposé (stock non demandé) | OK | Back-office : gestion des types. |
 | Ajout d'une nouvelle catégorie | OK | Back-office : gestion des catégories. |
 | Mise à jour du profil du client connecté | OK | Profil modifiable. |
-| Gestion des utilisateurs (hors inscription / mise à jour) | OK | Non implémentée (non demandée). |
+| Gestion des utilisateurs (hors inscription / mise à jour) | NOK | Non implémentée (non demandée). |
 | etc. | OK | Back-office produits + commande sans paiement (pas de tunnel). |
 
 ## Lancer en local
