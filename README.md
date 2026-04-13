@@ -1,46 +1,31 @@
-# E-boutique — Résumé des fonctionnalités
+# Projet d’e-boutique réalisé avec **Symfony** 
 
-Cette e-boutique demandée est fournie dans `griche_eboutique/` (**Symfony**), thème **jeux vidéo / consoles**.
+Le code du projet se trouve dans `griche_eboutique/`.
 
-> Les dossiers `symfony-eboutique/` et `e-boutique/` restent présents dans ce repo mais ne sont pas la version finale demandée.
-
-## Démarrer
-
-- `cd griche_eboutique`
-- `composer install`
-- Configurer la base (`.env` / `.env.local`), puis :
-  - `php bin/console doctrine:migrations:diff`
-  - `php bin/console doctrine:migrations:migrate`
-  - `php bin/console app:seed --reset` (données de démo)
-- Lancer :
-  - `symfony serve -d` (ou `php -S 127.0.0.1:8000 -t public`)
-
-## Légende (cotation)
+## Cotation (OK / NOK / Légers bugs / Syntaxe en place mais non fonctionnelle)
 
 - **OK** : fonctionnalité opérationnelle
-- **NOK** : fonctionnalité absente ou non opérationnelle
+- **NOK** : fonctionnalité absente / non opérationnelle
 - **Légers bugs** : fonctionnalité présente mais avec anomalies mineures
-- **Syntaxe en place mais non fonctionnelle** : écrans/structure présents, mais logique incomplète (non utilisable)
+- **Syntaxe en place mais non fonctionnelle** : écrans/structure présents, mais logique incomplète
 
-## Fonctionnalités
+## Fonctionnalités (résumé)
 
-> Cotation basée sur l’implémentation dans `griche_eboutique/`.
+| Fonctionnalité demandée | Cotation | Détails |
 
-| Fonctionnalité | Cotation | Notes |
-|---|---|---|
-| Login (connexion) | OK | Symfony Security (session). |
-| Inscription + contrôle de majorité (date de naissance) | OK | Refus si `< 18 ans` (inscription + profil). |
-| Parcours par catégorie | OK | Pages dédiées `/consoles` et `/offres` + page jeux `/`. |
-| Parcours des articles | OK | Liste + fiche produit `/produit/{slug}`. |
+| Login (connexion) | OK | Connexion par email/mot de passe, session Symfony. |
+| Inscription avec un contrôle de majorité sur la date de naissance | OK | Refus si l’utilisateur a moins de 18 ans. |
+| Parcours par catégorie | OK | Pages : Tous les jeux / Consoles / Offres / Nouveautés. |
+| Parcours des articles | OK | Liste + fiche produit (détails). |
 | Mise au panier | OK | Panier en session. |
-| Ajustement des quantités au panier + prix total | OK | Maj des quantités + total + transport. |
-| Message “commande faite” | OK | Validation `/commande/valider` + flash “Commande effectuée.” |
-| Ajout d'un nouveau type d'article proposé (stock non demandé) | OK | Back-office `/admin/types` (ROLE_ADMIN). |
-| Ajout d'une nouvelle catégorie | OK | Back-office `/admin/categories` (ROLE_ADMIN). |
-| Mise à jour du profil du client connecté | OK | `/compte/profil` (ROLE_USER). |
-| Déploiement (AlwaysData) | Syntaxe en place mais non fonctionnelle | Structure Symfony + `public/.htaccess` ok, mais nécessite configuration AlwaysData + DB + `composer install` côté hébergeur. |
-| Autres (“etc.”) | OK | Back-office produits `/admin/produits`, page `/nouveautes`, commande sans paiement, transport calculé. |
+| Ajustement des quantités au panier avec le prix total | OK | Quantités modifiables + total + frais de transport. |
+| Message de commande faite | OK | Validation de commande + message de confirmation. |
+| Ajout d'un nouveau type d'article proposé (stock non demandé) | OK | Back-office : gestion des types. |
+| Ajout d'une nouvelle catégorie | OK | Back-office : gestion des catégories. |
+| Mise à jour du profil du client connecté | OK | Profil modifiable (adresse, infos, etc.). |
+| Gestion des utilisateurs (hors inscription / mise à jour) | OK | Non implémentée (non demandée). |
+| etc. | OK | Back-office produits + commande sans paiement (pas de tunnel). |
 
-## Périmètre utilisateur
+## griche_eboutique
 
-- Hors **inscription** et **mise à jour du profil**, la gestion des utilisateurs n’est **pas demandée** (bonus possible).
+`http://127.0.0.1:8000`.

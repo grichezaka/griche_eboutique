@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\User;
 use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,11 +38,12 @@ class CheckoutController extends AbstractController
             return $this->redirectToRoute('cart_index');
         }
 
-        /** @var \App\Entity\User $user */
         $user = $this->getUser();
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
 
         $items = array_map(static function (array $line): array {
-            /** @var \App\Entity\Product $p */
             $p = $line['product'];
             return [
                 'productId' => $p->getId(),
@@ -67,4 +69,3 @@ class CheckoutController extends AbstractController
         return $this->redirectToRoute('shop_all');
     }
 }
-

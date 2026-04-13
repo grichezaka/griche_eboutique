@@ -3,27 +3,24 @@
 
 {% block body %}
   <div class="auth-wrap">
-    <section class="hero">
-      <h1>Connexion</h1>
-      <p>Connecte-toi pour finaliser ta commande.</p>
-    </section>
-
     <div class="card auth-card">
       {% if error %}
         <div class="flash error">Identifiants invalides.</div>
       {% endif %}
 
-      <h2 class="auth-title">Se connecter</h2>
-      <p class="auth-sub">Utilise ton email et ton mot de passe.</p>
+      <div class="auth-head">
+        <h1 class="auth-title">Connexion</h1>
+        <p class="auth-sub">Connecte-toi pour finaliser ta commande.</p>
+      </div>
 
       <form method="post" class="auth-form">
-        <div>
-          <label class="muted">Email</label>
-          <input class="input" type="email" name="_username" value="{{ last_username }}" autocomplete="email" required />
+        <div class="form-row">
+          <label for="login_email">Email</label>
+          <input class="input" id="login_email" type="email" name="_username" value="{{ last_username }}" autocomplete="email" required />
         </div>
-        <div>
-          <label class="muted">Mot de passe</label>
-          <input class="input" type="password" name="_password" autocomplete="current-password" required />
+        <div class="form-row">
+          <label for="login_password">Mot de passe</label>
+          <input class="input" id="login_password" type="password" name="_password" autocomplete="current-password" required />
         </div>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <div class="auth-actions">

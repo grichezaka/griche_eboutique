@@ -17,8 +17,10 @@ class ProfileController extends AbstractController
     #[Route('/compte/profil', name: 'profile_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, EntityManagerInterface $em, CartService $cart): Response
     {
-        /** @var User $user */
         $user = $this->getUser();
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
 
         $form = $this->createForm(ProfileFormType::class, $user);
         $form->handleRequest($request);
@@ -48,4 +50,3 @@ class ProfileController extends AbstractController
         return $age < 18;
     }
 }
-

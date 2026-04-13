@@ -3,40 +3,84 @@
 
 {% block body %}
   <div class="auth-wrap">
-    <section class="hero">
-      <h1>Créer un compte</h1>
-      <p>Majorité obligatoire (18+) + adresse de livraison.</p>
-    </section>
-
     <div class="card auth-card">
-      <h2 class="auth-title">Inscription</h2>
-      <p class="auth-sub">Renseigne tes informations pour commander.</p>
+      <div class="auth-head">
+        <h1 class="auth-title">Créer un compte</h1>
+        <p class="auth-sub">Majorité obligatoire (18+) et adresse de livraison.</p>
+      </div>
 
       {{ form_start(registrationForm, { attr: { class: 'auth-form' } }) }}
+
       <div class="auth-grid">
-        <div>{{ form_row(registrationForm.firstName) }}</div>
-        <div>{{ form_row(registrationForm.lastName) }}</div>
-      </div>
-      <div style="margin-top:12px">{{ form_row(registrationForm.email) }}</div>
-
-      <div class="auth-grid" style="margin-top:12px">
-        <div>{{ form_row(registrationForm.dob) }}</div>
-        <div>{{ form_row(registrationForm.country) }}</div>
-      </div>
-
-      <div style="margin-top:12px">{{ form_row(registrationForm.addressLine1) }}</div>
-      <div class="auth-grid" style="margin-top:12px">
-        <div>{{ form_row(registrationForm.postalCode) }}</div>
-        <div>{{ form_row(registrationForm.city) }}</div>
+        <div class="form-row">
+          {{ form_label(registrationForm.firstName) }}
+          {{ form_widget(registrationForm.firstName, { attr: { class: 'input', autocomplete: 'given-name' } }) }}
+          {{ form_errors(registrationForm.firstName) }}
+        </div>
+        <div class="form-row">
+          {{ form_label(registrationForm.lastName) }}
+          {{ form_widget(registrationForm.lastName, { attr: { class: 'input', autocomplete: 'family-name' } }) }}
+          {{ form_errors(registrationForm.lastName) }}
+        </div>
       </div>
 
-      <div style="margin-top:12px">{{ form_row(registrationForm.plainPassword.first) }}</div>
-      <div style="margin-top:12px">{{ form_row(registrationForm.plainPassword.second) }}</div>
+      <div class="form-row">
+        {{ form_label(registrationForm.email) }}
+        {{ form_widget(registrationForm.email, { attr: { class: 'input', autocomplete: 'email' } }) }}
+        {{ form_errors(registrationForm.email) }}
+      </div>
+
+      <div class="auth-grid">
+        <div class="form-row">
+          {{ form_label(registrationForm.dob) }}
+          {{ form_widget(registrationForm.dob, { attr: { class: 'input' } }) }}
+          <div class="help">Tu dois avoir au moins 18 ans.</div>
+          {{ form_errors(registrationForm.dob) }}
+        </div>
+        <div class="form-row">
+          {{ form_label(registrationForm.country) }}
+          {{ form_widget(registrationForm.country, { attr: { class: 'input', autocomplete: 'country-name' } }) }}
+          {{ form_errors(registrationForm.country) }}
+        </div>
+      </div>
+
+      <div class="form-row">
+        {{ form_label(registrationForm.addressLine1) }}
+        {{ form_widget(registrationForm.addressLine1, { attr: { class: 'input', autocomplete: 'street-address' } }) }}
+        {{ form_errors(registrationForm.addressLine1) }}
+      </div>
+
+      <div class="auth-grid">
+        <div class="form-row">
+          {{ form_label(registrationForm.postalCode) }}
+          {{ form_widget(registrationForm.postalCode, { attr: { class: 'input', autocomplete: 'postal-code' } }) }}
+          {{ form_errors(registrationForm.postalCode) }}
+        </div>
+        <div class="form-row">
+          {{ form_label(registrationForm.city) }}
+          {{ form_widget(registrationForm.city, { attr: { class: 'input', autocomplete: 'address-level2' } }) }}
+          {{ form_errors(registrationForm.city) }}
+        </div>
+      </div>
+
+      <div class="form-row">
+        {{ form_label(registrationForm.plainPassword.first) }}
+        {{ form_widget(registrationForm.plainPassword.first, { attr: { class: 'input', autocomplete: 'new-password' } }) }}
+        <div class="help">8 caractères minimum.</div>
+        {{ form_errors(registrationForm.plainPassword.first) }}
+      </div>
+
+      <div class="form-row">
+        {{ form_label(registrationForm.plainPassword.second) }}
+        {{ form_widget(registrationForm.plainPassword.second, { attr: { class: 'input', autocomplete: 'new-password' } }) }}
+        {{ form_errors(registrationForm.plainPassword.second) }}
+      </div>
 
       <div class="auth-actions">
         <button class="btn" type="submit">Créer le compte</button>
         <a class="pill" href="{{ path('app_login') }}">J’ai déjà un compte</a>
       </div>
+
       {{ form_end(registrationForm) }}
     </div>
   </div>

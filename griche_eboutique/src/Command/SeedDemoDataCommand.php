@@ -80,7 +80,6 @@ class SeedDemoDataCommand extends Command
         }
 
         $products = [
-            // Jeux (6)
             ['slug' => 'neon-drift-ps5', 'name' => 'Neon Drift (PS5)', 'desc' => 'Course arcade futuriste.', 'price' => 5999, 'cat' => 'jeux', 'type' => 'Nouveau', 'img' => '/assets/products/game-neon.svg'],
             ['slug' => 'skyforge-quest-pc', 'name' => 'Skyforge Quest (PC)', 'desc' => 'RPG coop en ligne.', 'price' => 3999, 'cat' => 'jeux', 'type' => 'Standard', 'img' => '/assets/products/game-sky.svg'],
             ['slug' => 'shadow-ops-xbox', 'name' => 'Shadow Ops (Xbox)', 'desc' => 'FPS tactique.', 'price' => 4999, 'cat' => 'jeux', 'type' => 'Promotion', 'img' => '/assets/products/game-ops.svg'],
@@ -88,11 +87,9 @@ class SeedDemoDataCommand extends Command
             ['slug' => 'galaxy-raiders-pc', 'name' => 'Galaxy Raiders (PC)', 'desc' => 'Shooter spatial.', 'price' => 2999, 'cat' => 'jeux', 'type' => 'Promotion', 'img' => '/assets/products/game-galaxy.svg'],
             ['slug' => 'summit-legends-ps5', 'name' => 'Summit Legends (PS5)', 'desc' => 'Survie en montagne.', 'price' => 4999, 'cat' => 'jeux', 'type' => 'Nouveau', 'img' => '/assets/products/game-mountain.svg'],
 
-            // Consoles (2)
             ['slug' => 'console-nova-x', 'name' => 'Console Nova X', 'desc' => 'Console nouvelle génération.', 'price' => 49999, 'cat' => 'consoles', 'type' => 'Standard', 'img' => '/assets/products/console.svg'],
             ['slug' => 'console-mini-retro', 'name' => 'Console Mini Retro', 'desc' => 'Pack rétro + 30 classiques.', 'price' => 8999, 'cat' => 'consoles', 'type' => 'Promotion', 'img' => '/assets/products/console-mini.svg'],
 
-            // Offres (4)
             ['slug' => 'psplus-1m', 'name' => 'PS Plus — 1 mois', 'desc' => 'Accès en ligne + jeux mensuels.', 'price' => 1099, 'cat' => 'offres', 'type' => 'Standard', 'img' => '/assets/products/sub-1.svg'],
             ['slug' => 'psplus-3m', 'name' => 'PS Plus — 3 mois', 'desc' => 'Accès en ligne + jeux mensuels.', 'price' => 2999, 'cat' => 'offres', 'type' => 'Promotion', 'img' => '/assets/products/sub-3.svg'],
             ['slug' => 'psplus-6m', 'name' => 'PS Plus — 6 mois', 'desc' => 'Accès en ligne + jeux mensuels.', 'price' => 5499, 'cat' => 'offres', 'type' => 'Standard', 'img' => '/assets/products/sub-6.svg'],
@@ -139,4 +136,3 @@ class SeedDemoDataCommand extends Command
         $output->writeln('<info>Reset terminé.</info>');
     }
 }
-
