@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+  <section class="hero">
+    <h1>Produits</h1>
+    <p><a class="pill" href="{{ path('admin_products_new') }}">Ajouter</a></p>
+  </section>
+
+  <div class="card">
+    <div style="padding:16px">
+      <table class="table">
+        <thead><tr><th>Nom</th><th>Catégorie</th><th>Type</th><th class="right">Prix</th><th class="right">Actions</th></tr></thead>
+        <tbody>
+          {% for p in products %}
+            <tr>
+              <td>{{ p.name }}</td>
+              <td class="muted">{{ p.category.name }}</td>
+              <td class="muted">{{ p.type.name }}</td>
+              <td class="right">{{ (p.priceCents / 100)|number_format(2, '.', ' ') }} €</td>
+              <td class="right">
+                <a class="pill" href="{{ path('admin_products_edit', {id: p.id}) }}">Éditer</a>
+                <form method="post" action="{{ path('admin_products_delete', {id: p.id}) }}" style="display:inline">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete_product_' ~ p.id) }}">
+                  <button class="btn" type="submit">Supprimer</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="5" class="muted">Aucun produit.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
+

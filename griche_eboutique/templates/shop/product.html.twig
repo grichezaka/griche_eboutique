@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+  <a class="pill" href="{{ path('shop_all') }}">← Retour</a>
+  <div style="height:14px"></div>
+
+  <div class="card">
+    <div class="product" style="max-width:680px; margin:0 auto">
+      {% if product.imagePath %}
+        <img class="pimg" src="{{ product.imagePath }}" alt="{{ product.name }}">
+      {% endif %}
+      <div class="title">{{ product.name }}</div>
+      <div class="muted">{{ product.description }}</div>
+      <div style="font-weight:900; text-align:center">{{ (product.priceCents / 100)|number_format(2, '.', ' ') }} €</div>
+      <form method="post" action="{{ path('cart_add', {id: product.id}) }}">
+        <label class="muted" style="display:block; margin-bottom:6px">Quantité</label>
+        <input class="input" type="number" min="1" name="qty" value="1" />
+        <div style="height:10px"></div>
+        <button class="btn" type="submit">Ajouter au panier</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#0b1020"/>
+  <rect x="220" y="160" width="460" height="320" rx="18" fill="#0f172a" stroke="rgba(231,238,252,.25)" stroke-width="6"/>
+  <text x="450" y="220" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="26" font-weight="900" letter-spacing="4" fill="#e7eefc">OFFRE</text>
+  <text x="450" y="345" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="110" font-weight="900" fill="#00d4ff">1</text>
+  <text x="450" y="410" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="28" font-weight="800" letter-spacing="3" fill="#e7eefc">MOIS</text>
+</svg>
+

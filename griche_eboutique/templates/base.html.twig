@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}griche_eboutique{% endblock %}</title>
+    <link rel="stylesheet" href="/assets/app.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="top-inner">
+        <nav class="nav left">
+          <a href="{{ path('shop_all') }}">Accueil</a>
+          <a href="{{ path('shop_all') }}#contact">Contact</a>
+        </nav>
+
+        <a class="brand" href="{{ path('shop_all') }}">
+          <div>
+            <div class="name">Pixel Jeux</div>
+          </div>
+        </a>
+
+        <nav class="nav right">
+          <a href="{{ path('cart_index') }}">Panier ({{ cartCount|default(0) }})</a>
+          {% if app.user %}
+            <a href="{{ path('profile_edit') }}">Mon compte</a>
+            {% if is_granted('ROLE_ADMIN') %}
+              <a href="{{ path('admin_home') }}">Admin</a>
+            {% endif %}
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+          {% else %}
+            <a href="{{ path('app_login') }}">Connexion</a>
+            <a href="{{ path('app_register') }}">Créer un compte</a>
+          {% endif %}
+        </nav>
+      </div>
+
+      <nav class="tabs">
+        <a class="{{ pageKey == 'all' ? 'active' : '' }}" href="{{ path('shop_all') }}">Tous les jeux</a>
+        <a class="{{ pageKey == 'consoles' ? 'active' : '' }}" href="{{ path('shop_consoles') }}">Consoles</a>
+        <a class="{{ pageKey == 'offres' ? 'active' : '' }}" href="{{ path('shop_offres') }}">Offres</a>
+        <a class="{{ pageKey == 'new' ? 'active' : '' }}" href="{{ path('shop_new') }}">Nouveautés</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      {% for label, messages in app.flashes %}
+        {% for message in messages %}
+          <div class="flash {{ label == 'success' ? 'success' : 'error' }}">{{ message }}</div>
+        {% endfor %}
+      {% endfor %}
+      {% block body %}{% endblock %}
+    </main>
+  </body>
+</html>

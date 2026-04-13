@@ -1,0 +1,101 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Griche: Composer update",
+      "type": "shell",
+      "command": "composer update",
+      "options": {
+        "cwd": "${workspaceFolder}/griche_eboutique"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Griche: DB init (diff+migrate)",
+      "type": "shell",
+      "command": "php bin/console doctrine:migrations:diff && php bin/console doctrine:migrations:migrate",
+      "options": {
+        "cwd": "${workspaceFolder}/griche_eboutique"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Griche: Seed demo (--reset)",
+      "type": "shell",
+      "command": "php bin/console app:seed --reset",
+      "options": {
+        "cwd": "${workspaceFolder}/griche_eboutique"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Griche: Serve",
+      "type": "shell",
+      "command": "symfony serve",
+      "options": {
+        "cwd": "${workspaceFolder}/griche_eboutique"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Griche: Setup + Serve",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Griche: Composer update",
+        "Griche: DB init (diff+migrate)",
+        "Griche: Seed demo (--reset)",
+        "Griche: Serve"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Symfony: Composer update",
+      "type": "shell",
+      "command": "composer update",
+      "options": {
+        "cwd": "${workspaceFolder}/symfony-eboutique"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Symfony: DB init (create+diff+migrate)",
+      "type": "shell",
+      "command": "php bin/console doctrine:database:create && php bin/console doctrine:migrations:diff && php bin/console doctrine:migrations:migrate",
+      "options": {
+        "cwd": "${workspaceFolder}/symfony-eboutique"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Symfony: Seed demo data",
+      "type": "shell",
+      "command": "php bin/console app:seed",
+      "options": {
+        "cwd": "${workspaceFolder}/symfony-eboutique"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Symfony: Serve",
+      "type": "shell",
+      "command": "symfony serve",
+      "options": {
+        "cwd": "${workspaceFolder}/symfony-eboutique"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Symfony: Setup + Serve",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Symfony: Composer update",
+        "Symfony: DB init (create+diff+migrate)",
+        "Symfony: Seed demo data",
+        "Symfony: Serve"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %}Catégories{% endblock %}
+
+{% block body %}
+  <section class="hero">
+    <h1>Catégories</h1>
+    <p><a class="pill" href="{{ path('admin_categories_new') }}">Ajouter</a></p>
+  </section>
+
+  <div class="card">
+    <div style="padding:16px">
+      <table class="table">
+        <thead><tr><th>Nom</th><th>Slug</th><th class="right">Actions</th></tr></thead>
+        <tbody>
+          {% for c in categories %}
+            <tr>
+              <td>{{ c.name }}</td>
+              <td class="muted">{{ c.slug }}</td>
+              <td class="right">
+                <a class="pill" href="{{ path('admin_categories_edit', {id: c.id}) }}">Éditer</a>
+                <form method="post" action="{{ path('admin_categories_delete', {id: c.id}) }}" style="display:inline">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete_category_' ~ c.id) }}">
+                  <button class="btn" type="submit">Supprimer</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="3" class="muted">Aucune catégorie.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
+

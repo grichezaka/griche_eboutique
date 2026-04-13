@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}Types{% endblock %}
+
+{% block body %}
+  <section class="hero">
+    <h1>Types</h1>
+    <p><a class="pill" href="{{ path('admin_types_new') }}">Ajouter</a></p>
+  </section>
+
+  <div class="card">
+    <div style="padding:16px">
+      <table class="table">
+        <thead><tr><th>Nom</th><th class="right">Actions</th></tr></thead>
+        <tbody>
+          {% for t in types %}
+            <tr>
+              <td>{{ t.name }}</td>
+              <td class="right">
+                <a class="pill" href="{{ path('admin_types_edit', {id: t.id}) }}">Éditer</a>
+                <form method="post" action="{{ path('admin_types_delete', {id: t.id}) }}" style="display:inline">
+                  <input type="hidden" name="_token" value="{{ csrf_token('delete_type_' ~ t.id) }}">
+                  <button class="btn" type="submit">Supprimer</button>
+                </form>
+              </td>
+            </tr>
+          {% else %}
+            <tr><td colspan="2" class="muted">Aucun type.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
+

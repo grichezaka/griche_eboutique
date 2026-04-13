@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+  <section class="hero">
+    <h1>Mon profil</h1>
+    <p>Mettre à jour les informations client.</p>
+  </section>
+
+  <div class="card">
+    <div style="padding:16px; max-width:820px; margin:0 auto">
+      {{ form_start(profileForm) }}
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px">
+        <div>{{ form_row(profileForm.firstName) }}</div>
+        <div>{{ form_row(profileForm.lastName) }}</div>
+        <div style="grid-column: span 2">{{ form_row(profileForm.email) }}</div>
+        <div>{{ form_row(profileForm.dob) }}</div>
+        <div>{{ form_row(profileForm.country) }}</div>
+        <div style="grid-column: span 2">{{ form_row(profileForm.addressLine1) }}</div>
+        <div>{{ form_row(profileForm.postalCode) }}</div>
+        <div>{{ form_row(profileForm.city) }}</div>
+      </div>
+      <div style="height:10px"></div>
+      <button class="btn" type="submit">Mettre à jour</button>
+      {{ form_end(profileForm) }}
+    </div>
+  </div>
+{% endblock %}
+

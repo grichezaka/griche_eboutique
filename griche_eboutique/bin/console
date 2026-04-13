@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+use App\Kernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+require dirname(__DIR__).'/config/bootstrap.php';
+
+$input = new ArgvInput();
+$env = $input->getParameterOption(['--env', '-e'], $_SERVER['APP_ENV'] ?? 'dev', true);
+$_SERVER['APP_ENV'] = $_ENV['APP_ENV'] = $env;
+
+$debug = !in_array($env, ['prod'], true) && $input->hasParameterOption('--no-debug') === false;
+$_SERVER['APP_DEBUG'] = $_ENV['APP_DEBUG'] = $debug ? '1' : '0';
+
+$kernel = new Kernel($env, $debug);
+$application = new Application($kernel);
+$application->run($input);
+

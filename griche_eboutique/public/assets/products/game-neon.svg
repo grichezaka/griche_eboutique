@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#00d4ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="#0b1020"/>
+  <rect x="210" y="150" width="480" height="360" fill="rgba(15,23,42,.65)" stroke="rgba(231,238,252,.18)" stroke-width="6"/>
+  <path d="M260 430c120-120 250-200 380-220" stroke="url(#g)" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <circle cx="540" cy="310" r="36" fill="#00d4ff" opacity=".85"/>
+  <text x="450" y="120" text-anchor="middle" font-family="ui-sans-serif, system-ui" font-size="28" font-weight="900" letter-spacing="6" fill="#e7eefc">NEON DRIFT</text>
+</svg>
+

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+  <div class="auth-wrap">
+    <section class="hero">
+      <h1>Connexion</h1>
+      <p>Connecte-toi pour finaliser ta commande.</p>
+    </section>
+
+    <div class="card auth-card">
+      {% if error %}
+        <div class="flash error">Identifiants invalides.</div>
+      {% endif %}
+
+      <h2 class="auth-title">Se connecter</h2>
+      <p class="auth-sub">Utilise ton email et ton mot de passe.</p>
+
+      <form method="post" class="auth-form">
+        <div>
+          <label class="muted">Email</label>
+          <input class="input" type="email" name="_username" value="{{ last_username }}" autocomplete="email" required />
+        </div>
+        <div>
+          <label class="muted">Mot de passe</label>
+          <input class="input" type="password" name="_password" autocomplete="current-password" required />
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <div class="auth-actions">
+          <button class="btn" type="submit">Se connecter</button>
+          <a class="pill" href="{{ path('app_register') }}">Créer un compte</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

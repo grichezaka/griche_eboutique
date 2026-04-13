@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block title %}Commande{% endblock %}
+
+{% block body %}
+  <section class="hero">
+    <h1>Commande</h1>
+    <p>Pas de paiement : validation simple (comme demandé).</p>
+  </section>
+
+  <div class="card">
+    <div style="padding:16px">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Produit</th>
+            <th class="right">PU</th>
+            <th class="right">Qté</th>
+            <th class="right">Montant</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for line in cart.lines %}
+            <tr>
+              <td>{{ line.product.name }}</td>
+              <td class="right">{{ (line.unitCents / 100)|number_format(2, '.', ' ') }} €</td>
+              <td class="right">{{ line.qty }}</td>
+              <td class="right">{{ (line.lineCents / 100)|number_format(2, '.', ' ') }} €</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="3" class="right">Sous-total</th>
+            <th class="right">{{ (cart.subtotalCents / 100)|number_format(2, '.', ' ') }} €</th>
+          </tr>
+          <tr>
+            <th colspan="3" class="right">Transport</th>
+            <th class="right">{{ (cart.shippingCents / 100)|number_format(2, '.', ' ') }} €</th>
+          </tr>
+          <tr>
+            <th colspan="3" class="right">Total</th>
+            <th class="right">{{ (cart.totalCents / 100)|number_format(2, '.', ' ') }} €</th>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div style="height:12px"></div>
+      <div class="muted"><strong>Livraison</strong> : {{ app.user.addressLine1 }}, {{ app.user.postalCode }} {{ app.user.city }}, {{ app.user.country }}</div>
+
+      <form method="post" action="{{ path('checkout_confirm') }}" style="margin-top:12px">
+        <button class="btn" type="submit">Confirmer la commande</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+

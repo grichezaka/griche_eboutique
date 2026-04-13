@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+  <div class="auth-wrap">
+    <section class="hero">
+      <h1>Créer un compte</h1>
+      <p>Majorité obligatoire (18+) + adresse de livraison.</p>
+    </section>
+
+    <div class="card auth-card">
+      <h2 class="auth-title">Inscription</h2>
+      <p class="auth-sub">Renseigne tes informations pour commander.</p>
+
+      {{ form_start(registrationForm, { attr: { class: 'auth-form' } }) }}
+      <div class="auth-grid">
+        <div>{{ form_row(registrationForm.firstName) }}</div>
+        <div>{{ form_row(registrationForm.lastName) }}</div>
+      </div>
+      <div style="margin-top:12px">{{ form_row(registrationForm.email) }}</div>
+
+      <div class="auth-grid" style="margin-top:12px">
+        <div>{{ form_row(registrationForm.dob) }}</div>
+        <div>{{ form_row(registrationForm.country) }}</div>
+      </div>
+
+      <div style="margin-top:12px">{{ form_row(registrationForm.addressLine1) }}</div>
+      <div class="auth-grid" style="margin-top:12px">
+        <div>{{ form_row(registrationForm.postalCode) }}</div>
+        <div>{{ form_row(registrationForm.city) }}</div>
+      </div>
+
+      <div style="margin-top:12px">{{ form_row(registrationForm.plainPassword.first) }}</div>
+      <div style="margin-top:12px">{{ form_row(registrationForm.plainPassword.second) }}</div>
+
+      <div class="auth-actions">
+        <button class="btn" type="submit">Créer le compte</button>
+        <a class="pill" href="{{ path('app_login') }}">J’ai déjà un compte</a>
+      </div>
+      {{ form_end(registrationForm) }}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+  <section class="hero">
+    <h1>{{ title }}</h1>
+    <p><a class="pill" href="{{ back }}">← Retour</a></p>
+  </section>
+
+  <div class="card">
+    <div style="padding:16px; max-width:820px; margin:0 auto">
+      {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div style="height:10px"></div>
+        <button class="btn" type="submit">Enregistrer</button>
+      {{ form_end(form) }}
+    </div>
+  </div>
+{% endblock %}
+
