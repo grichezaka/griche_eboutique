@@ -1,6 +1,11 @@
-# Projet d’e-boutique réalisé avec **Symfony** 
+# Projet d’e-boutique réalisé avec **Symfony**
 
 Le code du projet se trouve dans `griche_eboutique/`.
+
+## Liens
+
+- **GitHub** : `https://github.com/grichezaka/griche_eboutique`
+- **Site en ligne** : `http://griche.alwaysdata.net`
 
 ## Cotation (OK / NOK / Légers bugs / Syntaxe en place mais non fonctionnelle)
 
@@ -12,7 +17,7 @@ Le code du projet se trouve dans `griche_eboutique/`.
 ## Fonctionnalités (résumé)
 
 | Fonctionnalité demandée | Cotation | Détails |
-
+|---|---|---|
 | Login (connexion) | OK | Connexion par email/mot de passe, session Symfony. |
 | Inscription avec un contrôle de majorité sur la date de naissance | OK | Refus si l’utilisateur a moins de 18 ans. |
 | Parcours par catégorie | OK | Pages : Tous les jeux / Consoles / Offres / Nouveautés. |
@@ -25,7 +30,3 @@ Le code du projet se trouve dans `griche_eboutique/`.
 | Mise à jour du profil du client connecté | OK | Profil modifiable (adresse, infos, etc.). |
 | Gestion des utilisateurs (hors inscription / mise à jour) | OK | Non implémentée (non demandée). |
 | etc. | OK | Back-office produits + commande sans paiement (pas de tunnel). |
-
-## griche_eboutique
-
-`http://127.0.0.1:8000`.

@@ -5,7 +5,7 @@ E-boutique Symfony (thème : **jeux vidéo / consoles**).
 ## URLs
 
 - **Site (production)** : http://griche.alwaysdata.net
-- **Code (GitHub)** : (à compléter) https://github.com/<user>/<repo>
+- **Code (GitHub)** : https://github.com/grichezaka/griche_eboutique
 
 ## Fonctionnalités (cotation)
 
@@ -54,7 +54,7 @@ php bin/console app:make-admin tonmail@example.com
 ## Déploiement AlwaysData (Apache)
 
 1) Déployer le dossier `griche_eboutique/` sur le serveur.  
-2) Configurer le site AlwaysData pour pointer sur : `www/griche_eboutique/public`  
+2) Configurer le site AlwaysData pour pointer sur : `www/griche_eboutique/griche_eboutique/public`  
 3) Variables d’environnement :
 - `APP_ENV=prod`
 - `APP_SECRET=...`
